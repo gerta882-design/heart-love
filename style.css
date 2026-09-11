@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap');
+
+:root {
+  --night: #15131c;
+  --wine: #6f1d3b;
+  --rose: #ef7190;
+  --peach: #ffd0c2;
+  --cream: #fff6ed;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow: hidden;
+  color: var(--cream);
+  background:
+    radial-gradient(circle at 18% 18%, rgba(239, 113, 144, 0.16), transparent 26%),
+    radial-gradient(circle at 84% 80%, rgba(255, 208, 194, 0.12), transparent 25%),
+    var(--night);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.love-scene {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  align-content: center;
+  padding: 20px 24px;
+  text-align: center;
+}
+
+.love-scene:not(.is-started) > :not(.start-button) {
+  display: none;
+}
+
+.love-scene:not(.is-started) > .eyebrow,
+.love-scene:not(.is-started) > .caption {
+  display: block;
+  color: var(--peach);
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.1;
+  text-transform: uppercase;
+  animation: intro-text 2.8s ease both;
+}
+
+.love-scene:not(.is-started) > .caption {
+  animation-delay: 0.35s;
+}
+
+.love-scene.is-transitioning > .eyebrow,
+.love-scene.is-transitioning > .caption {
+  animation: intro-out 0.9s ease forwards;
+}
+
+.love-scene.is-started > .eyebrow,
+.love-scene.is-started > .caption {
+  display: none;
+}
+
+.eyebrow,
+.caption {
+  margin: 0;
+  color: var(--peach);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  animation: appear 1.2s ease both;
+}
+
+h1 {
+  margin: 8px 0 2px;
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.5rem, 10vw, 7rem);
+  font-weight: 600;
+  line-height: 0.9;
+  text-shadow: 0 0 35px rgba(239, 113, 144, 0.32);
+  animation: appear 1.2s 0.15s ease both;
+}
+
+.heart {
+  position: relative;
+  width: min(78vw, 700px);
+  height: min(68vh, 570px);
+  margin: 10px 0 14px;
+  filter: drop-shadow(0 0 24px rgba(239, 113, 144, 0.42));
+}
+
+#soundcloud-player {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.start-button {
+  position: relative;
+  z-index: 1;
+  width: 180px;
+  height: 160px;
+  margin-top: 4px;
+  padding: 0 0 12px;
+  border: 0;
+  color: var(--cream);
+  background: transparent;
+  cursor: pointer;
+  font: 500 1.1rem 'DM Sans', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 180ms ease, background 180ms ease;
+}
+
+.start-button::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  color: var(--rose);
+  content: '\2665';
+  font-family: Georgia, serif;
+  font-size: 11rem;
+  line-height: 1;
+  text-shadow: 0 0 24px rgba(239, 113, 144, 0.7);
+  transform: translate(-50%, -54%);
+}
+
+.start-button:hover {
+  background: transparent;
+  transform: scale(1.06);
+}
+
+.start-button.is-hidden {
+  display: none;
+}
+
+.word {
+  position: absolute;
+  z-index: 1;
+  display: block;
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(0.78rem, 1.5vw, 1.15rem);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+  text-shadow: 0 0 8px var(--rose), 0 0 18px var(--rose), 0 0 30px rgba(239, 113, 144, 0.85);
+  animation: second-heart-cycle 7s ease-in-out var(--word-delay) infinite both;
+}
+
+.second-heart-word {
+  z-index: 2;
+  animation: second-heart-cycle 7s ease-in-out var(--word-delay) infinite both;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  8% { transform: scale(1.025); }
+  16% { transform: scale(1); }
+  24% { transform: scale(1.015); }
+  32% { transform: scale(1); }
+}
+
+@keyframes word-in {
+  from { opacity: 0; transform: translate(-50%, -50%) scale(0.4); }
+  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes first-heart-in {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translate(-50%, -50%) scale(0.45);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes second-heart-cycle {
+  0%, 100% {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translate(-50%, -50%) scale(0.35);
+  }
+  22% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  58% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-50%, -50%) scale(1.22);
+  }
+  84% {
+    opacity: 0;
+    filter: blur(5px);
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes word-blink {
+  0%, 100% { opacity: 1; }
+  45% { opacity: 1; }
+  50% { opacity: 0.18; }
+  55% { opacity: 1; }
+}
+
+@keyframes word-cycle {
+  0% {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+  18%, 72% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  90%, 100% {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+}
+
+@keyframes intro-text {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes intro-out {
+  from { opacity: 1; transform: scale(1); }
+  to { opacity: 0; transform: scale(1.15); }
+}
+
+@media (max-width: 520px) {
+  body {
+    overflow: auto;
+  }
+
+  .heart {
+    width: 88vw;
+    height: 54vh;
+  }
+
+  .word {
+    font-size: clamp(0.5rem, 1.7vw, 0.8rem);
+  }
+}
