@@ -8,6 +8,7 @@ const addWord = (x, y, delay, className = '', xScale = 2.2, yScale = 2.45) => {
   word.style.left = `${50 + x * xScale}%`;
   word.style.top = `${50 - y * yScale}%`;
   word.style.setProperty('--word-delay', `${delay}s`);
+  word.style.setProperty('--cycle-delay', `${Math.random() * 12}s`);
   heart.append(word);
 };
 
@@ -16,7 +17,7 @@ for (let index = 0; index < wordCount; index += 1) {
   const x = 16 * Math.sin(angle) ** 3;
   const y = 13 * Math.cos(angle) - 5 * Math.cos(angle * 2) - 2 * Math.cos(angle * 3) - Math.cos(angle * 4);
 
-  addWord(x, y, 1 + Math.random() * 12);
+  addWord(x, y, index * 0.16, 'first-heart-word');
 }
 
 const secondHeartRows = 9;
@@ -30,7 +31,7 @@ for (let row = 0; row < secondHeartRows; row += 1) {
     const equation = (x * x + y * y - 1) ** 3 - x * x * y ** 3;
 
     if (equation < -0.16) {
-      const randomDelay = 9 + Math.random() * 12;
+      const randomDelay = 15 + Math.random() * 12;
       addWord(x, y, randomDelay, 'second-heart-word', 31, 32);
       secondHeartIndex += 1;
     }
@@ -60,6 +61,6 @@ startButton.addEventListener('click', () => {
 
   window.setTimeout(() => {
     scene.classList.add('is-started');
-  }, 900);
+  }, 200);
 });
 

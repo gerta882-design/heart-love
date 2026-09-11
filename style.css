@@ -161,6 +161,10 @@ h1 {
   animation: second-heart-cycle 7s ease-in-out var(--word-delay) infinite both;
 }
 
+.first-heart-word {
+  animation: first-heart-in 4s ease-out var(--word-delay) both;
+}
+
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
   8% { transform: scale(1.025); }
