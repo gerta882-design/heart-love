@@ -162,7 +162,9 @@ h1 {
 }
 
 .first-heart-word {
-  animation: first-heart-in 4s ease-out var(--word-delay) both;
+  animation:
+    first-heart-in 4s ease-out var(--word-delay) both,
+    second-heart-cycle 7s ease-in-out var(--blink-delay) infinite;
 }
 
 @keyframes heartbeat {

@@ -9,6 +9,7 @@ const addWord = (x, y, delay, className = '', xScale = 2.2, yScale = 2.45) => {
   word.style.top = `${50 - y * yScale}%`;
   word.style.setProperty('--word-delay', `${delay}s`);
   word.style.setProperty('--cycle-delay', `${Math.random() * 12}s`);
+  word.style.setProperty('--blink-delay', `${4 + delay + Math.random() * 7}s`);
   heart.append(word);
 };
 
@@ -23,6 +24,7 @@ for (let index = 0; index < wordCount; index += 1) {
 const secondHeartRows = 9;
 const secondHeartColumns = 15;
 let secondHeartIndex = 0;
+const mainHeartFormDuration = (wordCount - 1) * 0.16 + 4;
 
 for (let row = 0; row < secondHeartRows; row += 1) {
   for (let column = 0; column < secondHeartColumns; column += 1) {
@@ -31,7 +33,7 @@ for (let row = 0; row < secondHeartRows; row += 1) {
     const equation = (x * x + y * y - 1) ** 3 - x * x * y ** 3;
 
     if (equation < -0.16) {
-      const randomDelay = 15 + Math.random() * 12;
+      const randomDelay = mainHeartFormDuration + Math.random() * 1.5;
       addWord(x, y, randomDelay, 'second-heart-word', 31, 32);
       secondHeartIndex += 1;
     }
@@ -42,7 +44,7 @@ const startButton = document.querySelector('#start-button');
 const playerFrame = document.querySelector('#soundcloud-player');
 const scene = document.querySelector('.love-scene');
 const soundcloudPlayer = SC.Widget(playerFrame);
-const startTime = 105000;
+const startTime = 100000;
 let shouldStartMusic = false;
 
 soundcloudPlayer.bind(SC.Widget.Events.READY, () => {
